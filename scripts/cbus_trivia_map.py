@@ -54,8 +54,13 @@ cbus_coords = [39.971178, -82.998795]
 cbus_map = folium.Map(location = cbus_coords, zoom_start = 11.15)
 
 # Add markers
+for i, row in cbus_trivia_df.iterrows():
+    folium.Marker(
+        location=[row['Latitude'], row['Longitude']],
+        popup=row['Bar']
+    ).add_to(cbus_map)
 
 # Add filters
 
 # Save the map
-#cbus_map.save("output/cbus_map.html")
+cbus_map.save("output/cbus_map.html")
