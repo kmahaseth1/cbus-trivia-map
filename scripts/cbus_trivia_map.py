@@ -48,10 +48,10 @@ cbus_trivia_df['Longitude'] = lon
 
 # Create the base map
 # Columbus's Coordinates
-# cbus_coords = [39.971178, -82.998795]
+cbus_coords = [39.971178, -82.998795]
 
 # Create the map
-# cbus_map = folium.Map(location = cbus_coords, zoom_start = 11.15)
+cbus_map = folium.Map(location = cbus_coords, zoom_start = 11.15)
 
 # Add markers
 
