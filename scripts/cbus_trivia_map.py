@@ -21,7 +21,7 @@ df_sun = df.iloc[14:20, 28:34]
 # Update column headers
 dfs = [df_mon, df_tue, df_wed, df_thu, df_fri, df_sat, df_sun]
 days = list(cd.day_name)
-constant_cols = ['Bar', 'Company', 'Host', ' Start Time', 'Address', 'Address 2']
+constant_cols = ['Bar', 'Company', 'Host', 'Start Time', 'Address', 'Address 2']
 
 # Add day column to each DataFrame
 for i, df in enumerate(dfs):
@@ -55,9 +55,15 @@ cbus_map = folium.Map(location = cbus_coords, zoom_start = 11.15)
 
 # Add markers
 for i, row in cbus_trivia_df.iterrows():
+    label_html = f"""
+    <b>Bar Name:</b> {row['Bar']}<br>
+    <b>Trivia Day:</b> {row['Day']}<br>
+    <b>Company:</b> {row['Company']}<br>
+    <b>Start Time:</b> {row['Start Time']}
+    """
     folium.Marker(
         location=[row['Latitude'], row['Longitude']],
-        popup=row['Bar']
+        popup=folium.Popup(label_html, max_width=500)
     ).add_to(cbus_map)
 
 # Add filters
