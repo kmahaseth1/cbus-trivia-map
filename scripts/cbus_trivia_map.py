@@ -53,20 +53,27 @@ cbus_coords = [39.971178, -82.998795]
 # Create the map
 cbus_map = folium.Map(location = cbus_coords, zoom_start = 11.15)
 
-# Add markers
-for i, row in cbus_trivia_df.iterrows():
-    label_html = f"""
-    <b>Bar Name:</b> {row['Bar']}<br>
-    <b>Trivia Day:</b> {row['Day']}<br>
-    <b>Company:</b> {row['Company']}<br>
-    <b>Start Time:</b> {row['Start Time']}
-    """
-    folium.Marker(
-        location=[row['Latitude'], row['Longitude']],
-        popup=folium.Popup(label_html, max_width=500)
-    ).add_to(cbus_map)
+# Create FeatureGroup to add markers and day based filter
+for day in cbus_trivia_df['Day'].unique():
+    feature_group = folium.FeatureGroup(name = day)
+    day_df = cbus_trivia_df[cbus_trivia_df['Day'] == day]
 
-# Add filters
+    for i, row in day_df.iterrows():
+        label_html = f"""
+        <b>Bar Name:</b> {row['Bar']}<br>
+        <b>Trivia Day:</b> {row['Day']}<br>
+        <b>Company:</b> {row['Company']}<br>
+        <b>Start Time:</b> {row['Start Time']}
+        """
+        folium.Marker(
+            location=[row['Latitude'], row['Longitude']],
+            popup=folium.Popup(label_html, max_width=500)
+        ).add_to(feature_group)
+    
+    feature_group.add_to(cbus_map)
+
+# Add checkbox
+folium.LayerControl(collapsed=False).add_to(cbus_map)
 
 # Save the map
 cbus_map.save("output/cbus_map.html")
