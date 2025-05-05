@@ -55,7 +55,7 @@ for col in reversed(link_cols):
             # If the initial URL exists, retrieve the full URL
             if initial_url:
                 driver.get(initial_url)
-                time.sleep(20)
+                time.sleep(60)
                 full_url = driver.current_url
                 sheet.cell(row=row, column=new_idx2).value = full_url
             else:
