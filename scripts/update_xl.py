@@ -2,6 +2,7 @@ import openpyxl as xl
 import os
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
 import time
 
 # Update the current working directory to the main project folder
@@ -16,18 +17,13 @@ options = Options()
 options.add_argument('--headless')
 driver = webdriver.Chrome(options=options)
 
-# Create two additional columns for each trivia event 
-# One for initial URL and another for the full URL
+# Create an additional column to extract the street address
 link_cols = [1, 6, 11, 16, 21]
 
 for col in reversed(link_cols):
-    new_idx = col + 4
-    sheet.insert_cols(new_idx)
-    sheet.cell(row=1, column=new_idx).value = 'Initial URL'
-
-    new_idx2 = new_idx + 1
-    sheet.insert_cols(new_idx2)
-    sheet.cell(row=1, column=new_idx2).value = 'Full URL'
+    street_idx = col + 4
+    sheet.insert_cols(street_idx)
+    sheet.cell(row=1, column=street_idx).value = 'Address'
 
     num_empty_rows = 0
     custom_max_row = sheet.max_row
@@ -43,25 +39,20 @@ for col in reversed(link_cols):
             custom_max_row = row - 4
             break
 
-    for row in range(2, custom_max_row+ 1):
+    for row in range(2, custom_max_row+1):
         source_cell = sheet.cell(row=row, column=col)
-        initial_url = None
 
         if source_cell.hyperlink:
-            initial_url = source_cell.hyperlink.target
-            sheet.cell(row=row, column=new_idx).value = initial_url
+            driver.get(source_cell.hyperlink.target)
+            time.sleep(2)
+            try:
+                address = driver.find_element(By.XPATH,
+                               "//button[(@data-item-id='address')]")
+                raw_address = address.get_attribute("aria-label")
+                sheet.cell(row=row, column=street_idx).value = raw_address[8:]
+            except Exception:
+                sheet.cell(row=row, column=street_idx).value = None
 
-        try:
-            # If the initial URL exists, retrieve the full URL
-            if initial_url:
-                driver.get(initial_url)
-                time.sleep(30)
-                full_url = driver.current_url
-                sheet.cell(row=row, column=new_idx2).value = full_url
-            else:
-                sheet.cell(row=row, column=new_idx2).value = ''
-        except Exception as e:
-            sheet.cell(row=row, column=new_idx2).value = f"Error: {str(e)}"
 
 # Save the new columns in a new workbook
 trivia_wb.save('data/cbus_trivia_list_updated.xlsx')
