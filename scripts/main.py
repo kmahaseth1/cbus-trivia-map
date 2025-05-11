@@ -23,7 +23,8 @@ for day in cbus_trivia_df['Day'].unique():
         <b>Bar Name:</b> {row['Bar']}<br>
         <b>Trivia Day:</b> {row['Day']}<br>
         <b>Company:</b> {row['Company']}<br>
-        <b>Start Time:</b> {row['Start Time']}
+        <b>Start Time:</b> {row['Start Time']}<br>
+        <b>Address:</b> {row['Address']}
         """
         folium.Marker(
             location=[row['Latitude'], row['Longitude']],
