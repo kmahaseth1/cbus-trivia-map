@@ -37,7 +37,7 @@ cbus_trivia_df = pd.concat(dfs, ignore_index=True)
 cbus_trivia_df = cbus_trivia_df[cbus_trivia_df['Bar'].notna()]
 cbus_trivia_df = cbus_trivia_df[cbus_trivia_df['Address'].notna()]
 
-# Extract coordinates from the full url
+# Extract coordinates from the street address
 lat = []
 lon = []
 geocoder = OpenCageGeocode(api_key)
