@@ -53,3 +53,6 @@ for a in cbus_trivia_df['Address']:
 # Add latitude and longitude columns to the DataFrame
 cbus_trivia_df['Latitude'] = lat
 cbus_trivia_df['Longitude'] = lon
+
+# Save df as an excel file to enable manual update of coordinates
+cbus_trivia_df.to_excel('data/final_trivia_list.xlsx')
