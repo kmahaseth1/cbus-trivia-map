@@ -1,4 +1,3 @@
-
 import folium
 import os
 import pandas as pd
@@ -11,7 +10,7 @@ final_df = pd.read_excel('data/final_trivia_list.xlsx')
 
 # Create the base map
 # Columbus's Coordinates
-cbus_coords = [39.971178, -82.998795]
+cbus_coords = [40.020000, -82.998795]
 
 # Create the map
 cbus_map = folium.Map(location = cbus_coords, zoom_start = 11.15)
