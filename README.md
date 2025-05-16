@@ -7,5 +7,5 @@ This project uses Python and the Folium library to create an interactive map bas
 ## Output
 View the interactive map [here](https://kmahaseth1.github.io/cbus-trivia_map/output/cbus_map.html)
 
-## Limitations
-Although the markers are generally accurate, they may not always be precisely positioned and could be off by up to a block. If you're using this to plan a visit, please refer to the address in the popup or search the establishment's location on Google to ensure address accuracy.
+## Before You Go
+The trivia information displayed on this map is based on data from the Google Sheets linked in the original Reddit post. Please note that changes to event dates, times, or cancellations may not be reflected here. If you plan to attend an event, it's best to confirm the details directly with the hosting establishment.
