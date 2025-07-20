@@ -1,7 +1,7 @@
 # Interactive Map of Bar Trivia events in Columbus, Ohio
 An end-to-end data visualization project that geocodes, and displays live events data on an interactive map using Python.
 
-![GIF](output/trivia_map_demo.gif)
+![GIF](output/cbu_trivia_map_demo.gif)
 
 ## Overview
 This project uses Python, Pandas, and the Folium mapping library to generate an interactive map of bar trivia nights in Columbus, Ohio. Data is sourced from a public Google Sheet shared in a [Reddit post](https://www.reddit.com/r/Columbus/comments/1cwl7eo/columbus_area_trivia_master_list/?rdt=46370) on r/Columbus by user [smf1114](https://www.reddit.com/user/smf1114/). The final product is an intuitive `.html` map that can be opened in any modern browser.
